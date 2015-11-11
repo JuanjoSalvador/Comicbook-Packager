@@ -6,4 +6,6 @@ Añadir argumentos
 	CON ARGUMENTOS
 		- Empaqueta el directorio que le pases como argumento en un CBZ.
 
-SCRIPT de instalación de CPacket en el bash
+	OTROS ARGUMENTOS
+	
+	- help
