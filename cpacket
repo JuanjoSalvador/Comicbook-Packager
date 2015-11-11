@@ -5,24 +5,70 @@
 # Website: http://juanjosalvador.github.io/
 # Repo: https://github.com/JuanjoSalvador/CPacket
 
-IFS='
-'
+# Functions: standard, inputdir, help
 
-for i in * ; do
-	
-	if [ -d $i ]; then
-
-		newName=`echo $i | tr " " _`
-		mv $i $newName	
-
-		if [ -d "$newName" ]; then
-			packed=`echo $newName.cbz`
-			zip $packed $i/*.jpg
+function standard () { # no options
+	IFS='
+	'
+	for i in * ; do
+		if [ -d $i ]
+			then
+				newName=`echo $i | tr " " _`
+				mv $i $newName
+				packed=`echo $newName.cbz`
+				zip $packed $newName/*.jpg
+		else
+			echo "$i no es un directorio, no será procesado."
 		fi
-	else
-		
-		echo "No hay directorios."
-		break;
-	fi
+	done
+}
 
-done
+function inputdir () { # -d
+	IFS='
+	'
+	if [ -z $1 ]; then
+			echo "Falta un directorio."
+	else
+		if [ -e $1 ]; then
+			for i in $1 ; do
+				if [ -d $i ]; then
+					newName=`echo $i | tr " " _`
+					mv $i $newName
+					packed=`echo $newName.cbz`
+					zip $packed $newName/*.jpg
+				else
+					echo "No hay directorios."
+					break;
+				fi
+			done
+		fi
+	fi
+}
+
+function help () { # -help
+	echo "USO DE CPACKET"
+	echo " "
+	echo "cpacket <opcion> <directorio>"
+	echo " "
+	echo "OPCIONES"
+	echo "Sin opciones  Empaqueta recursivamente en CBZ el directorio actual."
+	echo "-d            Empaqueta el directorio que le pasamos como argumento en CBZ."
+	echo "-r            Empaqueta el directorio que le pasamos como argumento en CBZ, recursivamente."
+	echo "--help         Muestra este menú de ayuda."
+}
+
+# Arguments
+
+case "$1" in
+	-d)
+		inputdir "$2"
+	  ;;
+	--help)
+	  help
+		;;
+	"")
+	  standard
+		;;
+	*)
+	 echo "Prueba con --help para ver ayuda."
+esac
