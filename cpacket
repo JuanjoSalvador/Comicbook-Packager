@@ -10,17 +10,20 @@
 function standard () { # no options
 	IFS='
 	'
-	for i in * ; do
-		if [ -d $i ]
-			then
-				newName=`echo $i | tr " " _`
-				$(mv $i $newName) >> /dev/null || echo "Ocurrió un error al procesar $i"
-				packed=`echo $newName.cbz`
-				$(zip $packed $newName/*.jpg) >> /dev/null || echo "Ocurrió un error al procesar $i"
-		else
-			echo "$i no es un directorio, no será procesado."
-		fi
-	done
+		for i in * ; do
+			if [ -d $i ] && [ ! -e "$i.cbz" ]; then
+					echo "Procesando $i..."
+					newName=`echo $i | tr " " '\ '`
+					if [ $i != "$newName" ]; then
+						$(mv $i $newName >> /dev/null) || echo "Ocurrió un error al procesar $i"
+					fi
+					packed=`echo $newName.cbz`
+					$(zip $packed $newName/*.jpg >> /dev/null) || echo "Ocurrió un error al procesar $i"
+					echo "$newName.cbz generado correctamente."
+			else
+				echo "$i no es un directorio, o ya ha sido procesado."
+			fi
+		done
 }
 
 function inputdir () { # -d
@@ -29,15 +32,19 @@ function inputdir () { # -d
 	if [ -z $1 ]; then
 			echo "Falta un directorio."
 	else
-		if [ -d $1 ]; then
+		if [ -d $1 ] && [ ! -e "$1.cbz" ]; then
 			for i in $1 ; do
-				newName=`echo $i | tr " " _`
-				$(mv $i $newName) >> /dev/null || echo "Ocurrió un error al procesar $i"
+				echo "Procesando $i..."
+				newName=`echo $i | tr " " '\ '`
+				if [ $i != "$newName" ]; then
+					$(mv $i $newName >> /dev/null) || echo "Ocurrió un error al procesar $i"
+				fi
 				packed=`echo $newName.cbz`
-				$(zip $packed $newName/*.jpg) >> /dev/null || echo "Ocurrió un error al procesar $i"
+				$(zip $packed $newName/*.jpg >> /dev/null) || echo "Ocurrió un error al procesar $i"
+				echo "$newName.cbz generado correctamente."
 			done
 		else
-			echo "El directorio introducido no existe o no es un directorio."
+			echo "$1 no es un directorio, o ya ha sido procesado."
 		fi
 	fi
 }
@@ -50,7 +57,7 @@ function help () { # -help
 	echo "Sin opciones  Empaqueta recursivamente en CBZ el directorio actual."
 	echo "-d            Empaqueta el directorio que le pasamos como argumento en CBZ."
 	echo "-r            Empaqueta el directorio que le pasamos como argumento en CBZ, recursivamente."
-	echo "--help         Muestra este menú de ayuda."
+	echo "--help        Muestra este menú de ayuda."
 }
 
 # Arguments
