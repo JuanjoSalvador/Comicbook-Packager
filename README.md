@@ -2,6 +2,10 @@
 # CPacket
 CPacket es un script de Linux que te permite empaquetar las páginas de un comic/manga en forma de archivo CBZ usando la interfaz de comandos.
 
+**IMPORTANTE**
+
+CPacket solo trabaja con imágenes con extensión `.jpg`.
+
 ## Instalación
 
 **CPacket** depende del paquete `zip`. Incluye un instalador para Debian/Ubuntu y derivadas (Linux Mint, elemetaryOS, Mangaka Linux, etc). En otras distribuciones se necesita instalar manualmente el paquete `zip` (disponible en los repositorios si no está instalado previamente).
