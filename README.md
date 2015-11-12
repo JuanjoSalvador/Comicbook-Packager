@@ -33,9 +33,9 @@ Necesitas `zip` y `git` instalado previamente en tu distribución. El paquete `z
 
 ## Uso de CPacket
 
-    $ cpacket
+    $ cpacket -r MyComicDirectory/MyComic/
 
-Empaqueta recursivamente TODO el directorio actual.
+Empaqueta recursivamente TODO el directorio introducido como parámetro.
 
     $ cpacket -d MyComicDirectory/MyComic/Cap1
 
