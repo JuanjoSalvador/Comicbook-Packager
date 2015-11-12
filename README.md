@@ -8,7 +8,7 @@ CPacket solo trabaja con imágenes con extensión `.jpg`.
 
 ## Instalación
 
-**CPacket** depende del paquete `zip`. Incluye un instalador para Debian/Ubuntu y derivadas (Linux Mint, elemetaryOS, Mangaka Linux, etc). En otras distribuciones se necesita instalar manualmente el paquete `zip` (disponible en los repositorios si no está instalado previamente).
+**CPacket** depende del paquete `zip`. Incluye un instalador para Debian/Ubuntu y derivadas (*Linux Mint, elemetaryOS, Mangaka Linux, etc*). En otras distribuciones se necesita instalar manualmente el paquete `zip` (disponible en los repositorios si no está instalado previamente).
 
 **Dependencias**
  * `zip`
@@ -16,12 +16,16 @@ CPacket solo trabaja con imágenes con extensión `.jpg`.
 
 #### Con instalador (Debian/Ubuntu)
 
+Instala las dependencias y CPacket.
+
     $ git clone https://github.com/JuanjoSalvador/CPacket.git
     $ cd CPacket
     $ sudo chmod +x ./install.sh
     $ sudo ./install.sh
 
 #### Sin instalador
+
+Necesitas `zip` y `git` instalado previamente en tu distribución. El paquete `zip` viene instalado por defecto en la mayoría de distribuciones.
 
     $ git clone https://github.com/JuanjoSalvador/CPacket.git
     $ cd CPacket
