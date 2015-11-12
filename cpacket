@@ -29,25 +29,21 @@ function inputdir () { # -d
 	if [ -z $1 ]; then
 			echo "Falta un directorio."
 	else
-		if [ -e $1 ]; then
+		if [ -d $1 ]; then
 			for i in $1 ; do
-				if [ -d $i ]; then
-					newName=`echo $i | tr " " _`
-					mv $i $newName
-					packed=`echo $newName.cbz`
-					zip $packed $newName/*.jpg
-				else
-					echo "No hay directorios."
-					break;
-				fi
+				newName=`echo $i | tr " " _`
+				mv $i $newName
+				packed=`echo $newName.cbz`
+				zip $packed $newName/*.jpg
 			done
+		else
+			echo "El directorio introducido no existe o no es un directorio."
 		fi
 	fi
 }
 
 function help () { # -help
 	echo "USO DE CPACKET"
-	echo " "
 	echo "cpacket <opcion> <directorio>"
 	echo " "
 	echo "OPCIONES"
