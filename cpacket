@@ -5,12 +5,19 @@
 # Website: http://juanjosalvador.github.io/
 # Repo: https://github.com/JuanjoSalvador/CPacket
 
-# Functions: standard, inputdir, help
+# Functions: standard, recursive, inputdir, help
 
-function standard () { # no options
+function standard () {
+	echo "Estamos trabajando en la GUI."
+}
+
+function recursive () { # -r
 	IFS='
 	'
-		for i in * ; do
+	if [ -z $1 ]; then
+			echo "Falta un directorio."
+	else
+		for i in $1/* ; do
 			if [ -d $i ] && [ ! -e "$i.cbz" ]; then
 					echo "Procesando $i..."
 					newName=`echo $i | tr " " '\ '`
@@ -19,11 +26,12 @@ function standard () { # no options
 					fi
 					packed=`echo $newName.cbz`
 					$(zip $packed $newName/*.jpg >> /dev/null) || echo "Ocurrió un error al procesar $i"
-					echo "$newName.cbz generado correctamente."
+					#echo "$newName.cbz generado correctamente."
 			else
 				echo "$i no es un directorio, o ya ha sido procesado."
 			fi
 		done
+	fi
 }
 
 function inputdir () { # -d
@@ -65,6 +73,9 @@ function help () { # -help
 case "$1" in
 	-d)
 		inputdir "$2"
+	  ;;
+	-r)
+		recursive "$2"
 	  ;;
 	--help)
 	  help
