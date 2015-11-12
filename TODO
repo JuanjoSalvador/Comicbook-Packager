@@ -1,3 +1,15 @@
+GENERAL
+
 - Añadir GUI con Zenity/Kdialog
 - Por defecto cargará la GUI
-- La GUI permitirá empaquetar un directorio de forma no recursiva 
+- La GUI permitirá empaquetar un directorio de forma no recursiva
+- Dependencias: añadir zenity
+
+ZENITY
+
+- Capturar y mostrar mensaje de error si algo falla
+- Añadir mensaje de ayuda
+
+FUTURO
+
+- Portar a Ruby

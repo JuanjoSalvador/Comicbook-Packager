@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Version 2.1
+# Version 2.2
 # Author: Juanjo Salvador
 # Website: http://juanjosalvador.github.io/
 # Repo: https://github.com/JuanjoSalvador/CPacket
@@ -8,7 +8,31 @@
 # Functions: standard, recursive, inputdir, help
 
 function standard () {
-	echo "Estamos trabajando en la GUI."
+	dir="Directorio único"
+  rec="Recursivo"
+  help="Mostrar ayuda"
+
+  boolean=`zenity --title "Text" \
+  --text "Selecciona una opción" \
+  --list --radiolist --column "" --column "" One "$dir" Two "$rec" Three "$help"`
+
+  case "$boolean" in
+    $dir)
+      FILE=`zenity --file-selection --title="Selecciona un directorio" --directory`
+      (cpacket -d "$FILE") 2>&1 | zenity --progress --title "Procesando" --text "Creando: $FILE.cbz" --pulsate --auto-close
+			zenity --info --text "Finalizado."
+      ;;
+    $rec)
+			FILE=`zenity --file-selection --title="Selecciona un directorio" --directory`
+			(cpacket -r "$FILE") 2>&1 | zenity --progress --title "Procesando" --text "Creando: $FILE.cbz" --pulsate --auto-close
+			zenity --info --text "Finalizado."
+      ;;
+    $help)
+      echo "Has elegido Mostrar ayuda"
+			zenity --info --text "En desarrollo"
+      ;;
+    *)
+  esac
 }
 
 function recursive () { # -r
@@ -25,8 +49,7 @@ function recursive () { # -r
 						$(mv $i $newName >> /dev/null) || echo "Ocurrió un error al procesar $i"
 					fi
 					packed=`echo $newName.cbz`
-					$(zip $packed $newName/*.jpg >> /dev/null) || echo "Ocurrió un error al procesar $i"
-					#echo "$newName.cbz generado correctamente."
+					$(zip -q $packed $newName/*.jpg && echo "$newName.cbz generado correctamente.") || echo "Ocurrió un error al procesar $i"
 			else
 				echo "$i no es un directorio, o ya ha sido procesado."
 			fi
@@ -48,8 +71,7 @@ function inputdir () { # -d
 					$(mv $i $newName >> /dev/null) || echo "Ocurrió un error al procesar $i"
 				fi
 				packed=`echo $newName.cbz`
-				$(zip $packed $newName/*.jpg >> /dev/null) || echo "Ocurrió un error al procesar $i"
-				echo "$newName.cbz generado correctamente."
+				$(zip -q $packed $newName/*.jpg && echo "$newName.cbz generado correctamente.") || echo "Ocurrió un error al procesar $i"
 			done
 		else
 			echo "$1 no es un directorio, o ya ha sido procesado."
