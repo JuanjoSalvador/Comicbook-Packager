@@ -19,11 +19,13 @@
 		if [ -e "/usr/bin/zip" ]; then
 			echo "El paquete zip está instalado."
 			cp ./cpacket /usr/local/bin
+			chmod +x /usr/local/bin/cpacket
 			echo "Finalizado"
 		else
 			echo "El paquete zip no está instalado. Instalando..."
 			apt-get install zip
 			cp ./cpacket /usr/local/bin
+			chmod +x /usr/local/bin/cpacket
 			echo "Finalizado"
 		fi
 	fi
