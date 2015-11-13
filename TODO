@@ -1,9 +1,6 @@
 GENERAL
 
-- Añadir GUI con Zenity/Kdialog
-- Por defecto cargará la GUI
-- La GUI permitirá empaquetar un directorio de forma no recursiva
-- Dependencias: añadir zenity
+- Añadir GUI con Kdialog (futuro?)
 
 ZENITY
 
