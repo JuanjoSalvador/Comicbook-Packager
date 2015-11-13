@@ -11,7 +11,7 @@
 # INIT variables and logs -------------------
 version="2.2"
 
-$USUARIO=`echo $USER`
+USUARIO=`echo $USER`
 if [ ! -d "/home/$USUARIO/.cbp" ]; then
 	mkdir /home/$USUARIO/.cbp
 	if [ ! -d "/home/$USUARIO/.cbp/logs" ]; then
