@@ -1,4 +1,12 @@
-88de651 (HEAD -> master, origin/master, origin/HEAD) Actualizado README.md
+4de56c0 Actualizado README.md
+0465e11 Opciones GUI y -r añadidas
+f43f615 Merge branch 'master' of https://github.com/JuanjoSalvador/CPacket
+8cdf707 Corregidos bugs menores
+e51b820 TODO actualizado
+1d7da50 Añadido changelog
+388181d Create .travis.yml
+56824ed Actualizado README.md
+88de651 Actualizado README.md
 9ad04a5 Minor bugs fixed
 065ae60 Fallback!
 4abb9e7 Fixed

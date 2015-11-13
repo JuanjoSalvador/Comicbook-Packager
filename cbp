@@ -1,0 +1,127 @@
+#!/bin/bash
+
+# [Comicbook Packager]
+# Version 2.2 for Debian/Ubuntu
+# Author: Juanjo Salvador
+# Website: http://juanjosalvador.github.io/
+# Repo: https://github.com/JuanjoSalvador/ComicbookPackagert
+
+# Functions: standard, recursive, inputdir, help
+
+# INIT variables and logs -------------------
+version="2.2"
+
+if [ ! -d "~/.cbp/logs" ]; then
+	mkdir ~/.logs
+fi
+$DATE=date
+
+#--------------------------------------------
+
+function standard () { # shows gui by default
+	dir="Directorio único"
+  rec="Recursivo"
+  hel="Mostrar ayuda"
+
+  boolean=`zenity --title "Comicbook Packager $version" \
+  --text "Selecciona una opción" \
+  --list --radiolist --column "" --column "" One "$dir" Two "$rec" Three "$hel"`
+
+  case "$boolean" in
+    $dir)
+      FILE=`zenity --file-selection --title="Selecciona un directorio" --directory`
+      (inputdir "$FILE") 2>&1 | zenity --progress --title "Procesando" --text "Creando: $FILE.cbz" --pulsate --auto-close
+			zenity --info --text "Finalizado."
+      ;;
+    $rec)
+			FILE=`zenity --file-selection --title="Selecciona un directorio" --directory`
+			(recursive "$FILE") 2>&1 | zenity --progress --title "Procesando" --text "Procesando..." --pulsate --auto-close
+			zenity --info --text "Finalizado."
+      ;;
+    $hel)
+			zenity --info --text "En desarrollo. Puedes usar la ayuda en modo texto con cbp -help"
+      ;;
+    *)
+  esac
+}
+
+function recursive () { # -r
+	IFS='
+	'
+	if [ -z $1 ]; then
+			echo "Falta un directorio."
+	else
+		for i in $1/* ; do
+			if [ -d $i ] && [ ! -e "$i.cbz" ]; then
+					echo "Procesando $i..."
+					newName=`echo $i | tr " " '\ '`
+					if [ $i != "$newName" ]; then
+						$(mv $i $newName >> /dev/null) || echo "[$DATE] - mv: Ocurrió un error al procesar $i" >> ~/.cbp/logs/log.txt
+					fi
+					packed=`echo $newName.cbz`
+					$(zip -q $packed $newName/*.jpg && echo "$newName.cbz generado correctamente.") || echo "[$DATE] - zip: Ocurrió un error al procesar $i" >> ~/.cbp/logs/log.txt
+			else
+				echo "$i no es un directorio, o ya ha sido procesado."
+			fi
+		done
+	fi
+}
+
+function inputdir () { # -d
+	IFS='
+	'
+	if [ -z $1 ]; then
+			echo "Falta un directorio."
+	else
+		if [ -d $1 ] && [ ! -e "$1.cbz" ]; then
+			for i in $1 ; do
+				echo "Procesando $i..."
+				newName=`echo $i | tr " " '\ '`
+				if [ $i != "$newName" ]; then
+					$(mv $i $newName >> /dev/null) || echo "[$DATE] - mv: Ocurrió un error al procesar $i" >> ~/.logs/log.txt
+				fi
+				packed=`echo $newName.cbz`
+				$(zip -q $packed $newName/*.jpg && echo "$newName.cbz generado correctamente.") || echo "[$DATE] - zip: Ocurrió un error al procesar $i" >> ~/.logs/log.txt
+			done
+		else
+			echo "$1 no es un directorio, o ya ha sido procesado."
+		fi
+	fi
+}
+
+function help () { # -help
+	echo "USO DE COMICBOOK PACKAGER (cbp)"
+	echo "cbp <opcion> <directorio>"
+	echo " "
+	echo "OPCIONES"
+	echo "Sin opciones  Muestra la interfaz gráfica de Comicbook Packager."
+	echo "-d            Empaqueta el directorio que le pasamos como argumento en CBZ."
+	echo "-r            Empaqueta el directorio que le pasamos como argumento en CBZ, recursivamente."
+	echo "-v            Imprime la versión de Comicbook Packager."
+	echo "--help        Imprime el menú de ayuda."
+}
+
+#--------------------------------------------
+# ARGUMENTOS
+#--------------------------------------------
+
+case "$1" in
+	-d)
+		inputdir "$2"
+	  ;;
+	-r)
+		recursive "$2"
+	  ;;
+	--help)
+	  help
+		;;
+	"")
+	  standard
+		;;
+	-v)
+	  echo "Comicbook Packager version $version"
+		echo "Desarrollado por Juanjo Salvador (http://juanjosalvador.github.io)"
+		;;
+	 *)
+	 echo "Prueba con --help para ver ayuda."
+esac
