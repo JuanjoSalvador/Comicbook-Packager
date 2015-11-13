@@ -8,7 +8,15 @@
 
 # Functions: standard, recursive, inputdir, help
 
+# INIT variables and logs -------------------
 version="2.2"
+
+if [ ! -d "~/.logs" ]; then
+	mkdir ~/.logs
+fi
+$DATE=date
+
+#--------------------------------------------
 
 function standard () { # shows gui by default
 	dir="Directorio único"
@@ -48,10 +56,10 @@ function recursive () { # -r
 					echo "Procesando $i..."
 					newName=`echo $i | tr " " '\ '`
 					if [ $i != "$newName" ]; then
-						$(mv $i $newName >> /dev/null) || echo "Ocurrió un error al procesar $i"
+						$(mv $i $newName >> /dev/null) || echo "[$DATE] - mv: Ocurrió un error al procesar $i" >> ~/.logs/log.txt
 					fi
 					packed=`echo $newName.cbz`
-					$(zip -q $packed $newName/*.jpg && echo "$newName.cbz generado correctamente.") || echo "Ocurrió un error al procesar $i"
+					$(zip -q $packed $newName/*.jpg && echo "$newName.cbz generado correctamente.") || echo "[$DATE] - zip: Ocurrió un error al procesar $i" >> ~/.logs/log.txt
 			else
 				echo "$i no es un directorio, o ya ha sido procesado."
 			fi
@@ -70,10 +78,10 @@ function inputdir () { # -d
 				echo "Procesando $i..."
 				newName=`echo $i | tr " " '\ '`
 				if [ $i != "$newName" ]; then
-					$(mv $i $newName >> /dev/null) || echo "Ocurrió un error al procesar $i"
+					$(mv $i $newName >> /dev/null) || echo "[$DATE] - mv: Ocurrió un error al procesar $i" >> ~/.logs/log.txt
 				fi
 				packed=`echo $newName.cbz`
-				$(zip -q $packed $newName/*.jpg && echo "$newName.cbz generado correctamente.") || echo "Ocurrió un error al procesar $i"
+				$(zip -q $packed $newName/*.jpg && echo "$newName.cbz generado correctamente.") || echo "[$DATE] - zip: Ocurrió un error al procesar $i" >> ~/.logs/log.txt
 			done
 		else
 			echo "$1 no es un directorio, o ya ha sido procesado."
@@ -93,7 +101,9 @@ function help () { # -help
 	echo "--help        Imprime el menú de ayuda."
 }
 
-# Arguments
+#--------------------------------------------
+# ARGUMENTOS
+#--------------------------------------------
 
 case "$1" in
 	-d)
