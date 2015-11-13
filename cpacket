@@ -18,18 +18,18 @@ function standard () {
 
   case "$boolean" in
     $dir)
-      FILE=`zenity --file-selection --title="Selecciona un directorio" --directory`
-      (cpacket -d "$FILE") 2>&1 | zenity --progress --title "Procesando" --text "Creando: $FILE.cbz" --pulsate --auto-close
-			zenity --info --text "Finalizado."
+      	FILE=`zenity --file-selection --title="Selecciona un directorio" --directory`
+      	(cpacket -d "$FILE") 2>&1 | zenity --progress --title "Procesando" --text "Creando: $FILE.cbz" --pulsate --auto-close
+	zenity --info --text "Finalizado."
       ;;
     $rec)
-			FILE=`zenity --file-selection --title="Selecciona un directorio" --directory`
-			(cpacket -r "$FILE") 2>&1 | zenity --progress --title "Procesando" --text "Creando: $FILE.cbz" --pulsate --auto-close
-			zenity --info --text "Finalizado."
+	FILE=`zenity --file-selection --title="Selecciona un directorio" --directory`
+	(cpacket -r "$FILE") 2>&1 | zenity --progress --title "Procesando" --text "Creando: $FILE.cbz" --pulsate --auto-close
+	zenity --info --text "Finalizado."
       ;;
     $help)
-      echo "Has elegido Mostrar ayuda"
-			zenity --info --text "En desarrollo"
+      	echo "Has elegido Mostrar ayuda"
+	zenity --info --text "En desarrollo"
       ;;
     *)
   esac
