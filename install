@@ -7,10 +7,15 @@
 # Repo: https://github.com/JuanjoSalvador/ComicbookPackager
 
 	if [ "$EUID" -ne 0 ]; then
-		echo "Necesita privilegios de superusuario. Ejecuta el instalador como root."
+		echo "Necesita privilegios de superusuario. Ejecuta el instalador como sudo."
 		exit
 	else
 		echo "Instalando Comicbook Packager..."
+
+		if [ ! -d "~/.cbp" ]; then
+			mkdir ~/.cbp
+		fi
+
 		echo "Comicbook Packager depende de zip."
 
 		if [ -e "/usr/bin/zip" ]; then
@@ -24,6 +29,8 @@
 					apt-get install zenity
 				fi
 			fi
+			cp ./README.md ~/.cbp
+			cp ./LICENSE ~/.cbp
 			echo "Finalizado"
 		else
 			echo "El paquete zip no está instalado. Instalando..."
@@ -37,6 +44,8 @@
 					apt-get install zenity
 				fi
 			fi
+			cp ./README.md ~/.cbp
+			cp ./LICENSE ~/.cbp
 			echo "Finalizado"
 		fi
 	fi

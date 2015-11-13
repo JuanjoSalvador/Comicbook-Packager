@@ -11,7 +11,7 @@
 # INIT variables and logs -------------------
 version="2.2"
 
-if [ ! -d "~/.logs" ]; then
+if [ ! -d "~/.cbp/logs" ]; then
 	mkdir ~/.logs
 fi
 $DATE=date
@@ -56,10 +56,10 @@ function recursive () { # -r
 					echo "Procesando $i..."
 					newName=`echo $i | tr " " '\ '`
 					if [ $i != "$newName" ]; then
-						$(mv $i $newName >> /dev/null) || echo "[$DATE] - mv: Ocurrió un error al procesar $i" >> ~/.logs/log.txt
+						$(mv $i $newName >> /dev/null) || echo "[$DATE] - mv: Ocurrió un error al procesar $i" >> ~/.cbp/logs/log.txt
 					fi
 					packed=`echo $newName.cbz`
-					$(zip -q $packed $newName/*.jpg && echo "$newName.cbz generado correctamente.") || echo "[$DATE] - zip: Ocurrió un error al procesar $i" >> ~/.logs/log.txt
+					$(zip -q $packed $newName/*.jpg && echo "$newName.cbz generado correctamente.") || echo "[$DATE] - zip: Ocurrió un error al procesar $i" >> ~/.cbp/logs/log.txt
 			else
 				echo "$i no es un directorio, o ya ha sido procesado."
 			fi
