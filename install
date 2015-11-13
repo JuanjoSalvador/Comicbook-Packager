@@ -12,10 +12,6 @@
 	else
 		echo "Instalando Comicbook Packager..."
 
-		if [ ! -d "~/.cbp" ]; then
-			mkdir ~/.cbp
-		fi
-
 		echo "Comicbook Packager depende de zip."
 
 		if [ -e "/usr/bin/zip" ]; then

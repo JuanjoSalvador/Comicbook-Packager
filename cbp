@@ -11,10 +11,14 @@
 # INIT variables and logs -------------------
 version="2.2"
 
-if [ ! -d "~/.cbp/logs" ]; then
-	mkdir ~/.logs
+USUARIO=`echo $USER`
+if [ ! -d "/home/$USUARIO/.cbp" ]; then
+	mkdir /home/$USUARIO/.cbp
+	if [ ! -d "/home/$USUARIO/.cbp/logs" ]; then
+		mkdir ~/.cbp/logs
+	fi
 fi
-$DATE=date
+DATE=`echo date`
 
 #--------------------------------------------
 
@@ -56,10 +60,10 @@ function recursive () { # -r
 					echo "Procesando $i..."
 					newName=`echo $i | tr " " '\ '`
 					if [ $i != "$newName" ]; then
-						$(mv $i $newName >> /dev/null) || echo "[$DATE] - mv: Ocurrió un error al procesar $i" >> ~/.cbp/logs/log.txt
+						(mv $i $newName >> /dev/null) || echo "[$DATE] - mv: Ocurrió un error al procesar $i" >> ~/.cbp/logs/log.txt
 					fi
 					packed=`echo $newName.cbz`
-					$(zip -q $packed $newName/*.jpg && echo "$newName.cbz generado correctamente.") || echo "[$DATE] - zip: Ocurrió un error al procesar $i" >> ~/.cbp/logs/log.txt
+					(zip -q $packed $newName/*.jpg && echo "$newName.cbz generado correctamente.") || echo "[$DATE] - zip: Ocurrió un error al procesar $i" >> ~/.cbp/logs/log.txt
 			else
 				echo "$i no es un directorio, o ya ha sido procesado."
 			fi
@@ -78,10 +82,10 @@ function inputdir () { # -d
 				echo "Procesando $i..."
 				newName=`echo $i | tr " " '\ '`
 				if [ $i != "$newName" ]; then
-					$(mv $i $newName >> /dev/null) || echo "[$DATE] - mv: Ocurrió un error al procesar $i" >> ~/.logs/log.txt
+					(mv $i $newName >> /dev/null) || echo "[$DATE] - mv: Ocurrió un error al procesar $i" >> ~/.logs/log.txt
 				fi
 				packed=`echo $newName.cbz`
-				$(zip -q $packed $newName/*.jpg && echo "$newName.cbz generado correctamente.") || echo "[$DATE] - zip: Ocurrió un error al procesar $i" >> ~/.logs/log.txt
+				(zip -q $packed $newName/*.jpg && echo "$newName.cbz generado correctamente.") || echo "[$DATE] - zip: Ocurrió un error al procesar $i" >> ~/.logs/log.txt
 			done
 		else
 			echo "$1 no es un directorio, o ya ha sido procesado."
