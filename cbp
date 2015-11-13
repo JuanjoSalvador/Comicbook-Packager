@@ -11,8 +11,12 @@
 # INIT variables and logs -------------------
 version="2.2"
 
-if [ ! -d "~/.cbp/" ]; then
-	mkdir ~/.cbp/logs
+$USUARIO=`echo $USER`
+if [ ! -d "/home/$USUARIO/.cbp" ]; then
+	mkdir /home/$USUARIO/.cbp
+	if [ ! -d "/home/$USUARIO/.cbp/logs" ]; then
+		mkdir ~/.cbp/logs
+	fi
 fi
 DATE=`echo date`
 
