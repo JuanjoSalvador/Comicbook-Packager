@@ -1,47 +1,36 @@
 #!/bin/bash
 
 # [Comicbook Packager] Installer
-# Version 2.2 for Debian/Ubuntu
+# Dependencies: zenity, zip, poppler-utils
+# Version 2.3 for Debian/Ubuntu
 # Author: Juanjo Salvador
+# Twitter: @Linuxneitor
 # Website: http://juanjosalvador.github.io/
 # Repo: https://github.com/JuanjoSalvador/ComicbookPackager
+
+dependencies=( "zenity" "zip" "pdfimages" )
 
 	if [ "$EUID" -ne 0 ]; then
 		echo "Necesita privilegios de superusuario. Ejecuta el instalador como sudo."
 		exit
 	else
+
 		echo "Instalando Comicbook Packager..."
+		echo "Comicbook Packager depende de zip, zenity y poppler-utils."
 
-		echo "Comicbook Packager depende de zip."
-
-		if [ -e "/usr/bin/zip" ]; then
-			echo "El paquete zip está instalado."
-			cp ./cbp /usr/local/bin
-			chmod +x /usr/local/bin/cbp
-			if [ ! -e "/usr/bin/zenity" ]; then
-				echo "El paquete zenity no está instalado. Es necesario para usar la GUI de Comicbook Packager. ¿Desea instalarlo? (s/n)"
-				read uinput
-				if [ $uinput = "s" ] || [ $uinput = "S" ]; then
-					apt-get install zenity
+		for i in "${dependencies[@]}"
+		do
+			if [ -e "/usr/bin/$i" ]; then
+				echo "El paquete $i está instalado."
+			else
+				if [ $i =! "pdfimages" ]; then
+					apt-get install $i
+				else
+					apt-get install poppler-utils
 				fi
 			fi
-			cp ./README.md ~/.cbp
-			cp ./LICENSE ~/.cbp
-			echo "Finalizado"
-		else
-			echo "El paquete zip no está instalado. Instalando..."
-			apt-get install zip
 			cp ./cbp /usr/local/bin
 			chmod +x /usr/local/bin/cbp
-			if [ ! -e "/usr/bin/zenity" ]; then
-				echo "El paquete zenity no está instalado. Es necesario para usar la GUI de Comicbook Packager. ¿Desea instalarlo? (s/n)"
-				read uinput
-				if [ $uinput = "s" ] || [ $uinput = "S" ]; then
-					apt-get install zenity
-				fi
-			fi
-			cp ./README.md ~/.cbp
-			cp ./LICENSE ~/.cbp
-			echo "Finalizado"
-		fi
+		done
+		echo "Finalizado"
 	fi
