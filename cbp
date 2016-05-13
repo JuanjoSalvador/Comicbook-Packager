@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # [Comicbook Packager]
-# Version 2.2 for Debian/Ubuntu
+# Version 2.2.1 for Debian/Ubuntu
 # Author: Juanjo Salvador
-# Website: http://juanjosalvador.github.io/
-# Repo: https://github.com/JuanjoSalvador/ComicbookPackagert
+# Website: http://juanjosalvador.es/
+# Repo: https://github.com/JuanjoSalvador/Comicbook-Packager
 
 # Functions: standard, recursive, inputdir, help
 
@@ -124,7 +124,7 @@ case "$1" in
 		;;
 	-v)
 	  echo "Comicbook Packager version $version"
-		echo "Desarrollado por Juanjo Salvador (http://juanjosalvador.github.io)"
+		echo "Desarrollado por Juanjo Salvador (http://juanjosalvador.es/)"
 		;;
 	 *)
 	 echo "Prueba con --help para ver ayuda."
