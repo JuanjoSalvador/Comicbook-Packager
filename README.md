@@ -19,8 +19,8 @@ Comicbook Packager solo trabaja con imágenes con extensión `.jpg`.
 
 Instala las dependencias y Comicbook Packager.
 
-    $ git clone https://github.com/JuanjoSalvador/CPacket.git
-    $ cd CPacket
+    $ git clone https://github.com/JuanjoSalvador/Comicbook-Packager.git
+    $ cd Comicbook-Packager
     $ sudo chmod +x ./install
     $ sudo ./install
 
@@ -28,8 +28,8 @@ Instala las dependencias y Comicbook Packager.
 
 Necesitas `zip` (dependencia) y `git` (opcional) instalado previamente en tu distribución. El paquete `zip` viene instalado por defecto en la mayoría de distribuciones.
 
-    $ git clone https://github.com/JuanjoSalvador/CPacket.git
-    $ cd CPacket
+    $ git clone https://github.com/JuanjoSalvador/Comicbook-Packager.git
+    $ cd Comicbook-Packager
     $ sudo cp ./cbp /usr/local/bin
 
 ## Uso de Comicbook Packager
