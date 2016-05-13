@@ -14,6 +14,7 @@ Comicbook Packager solo trabaja con imágenes con extensión `.jpg`.
  * `zip`
  * `git` (opcional)
  * `zenity` (GTK, opcional)
+ * `propper-utils` (opcional)
 
 #### Con instalador (Debian/Ubuntu)
 
@@ -26,7 +27,7 @@ Instala las dependencias y Comicbook Packager.
 
 #### Sin instalador
 
-Necesitas `zip` (dependencia) y `git` (opcional) instalado previamente en tu distribución. El paquete `zip` viene instalado por defecto en la mayoría de distribuciones.
+Necesitas `zip` (dependencia), `propper-utils` (opcinal, para PDF) y `git` (opcional) instalado previamente en tu distribución. El paquete `zip` viene instalado por defecto en la mayoría de distribuciones.
 
     $ git clone https://github.com/JuanjoSalvador/Comicbook-Packager.git
     $ cd Comicbook-Packager
@@ -49,6 +50,10 @@ Empaqueta el directorio `MyComicDirectory/MyComic/Cap1` en un CBZ.
     $ cbp --help
 
 Muestra el menú de ayuda.
+
+    $ cbp -pdf MyComicDirectory/MyComic.pdf
+    
+Convierte un comic en PDF a CBZ.
 
 ## Licencia
 
