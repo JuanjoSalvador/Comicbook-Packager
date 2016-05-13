@@ -1,14 +1,11 @@
 #!/bin/bash
 
 # [Comicbook Packager]
-<<<<<<< HEAD
 # Version 2.3 for Debian/Ubuntu
 # Author: Juanjo Salvador
 # Twitter: @Linuxneitor
-=======
-# Version 2.2.1 for Debian/Ubuntu
+# Version 2.3 for Debian/Ubuntu
 # Author: Juanjo Salvador
->>>>>>> master
 # Website: http://juanjosalvador.es/
 # Repo: https://github.com/JuanjoSalvador/Comicbook-Packager
 
