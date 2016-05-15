@@ -1,5 +1,5 @@
 # Comicbook Packager
 
-### Windows Developtment version
+### Windows version (master)
 
 Jotaperamez
