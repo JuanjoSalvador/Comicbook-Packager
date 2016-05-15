@@ -1,6 +1,17 @@
 # Comicbook Packager
 **Comicbook Packager** te permite empaquetar un comic/manga en forma de archivo CBZ usando la interfaz de comandos (Terminal en Linux o CMD en Windows).
 
+* [Linux](https://github.com/JuanjoSalvador/Comicbook-Packager/blob/master/README.md#gnulinux)
+    * [Instalación](https://github.com/JuanjoSalvador/Comicbook-Packager/blob/master/README.md#instalación)
+    * [Dependencias](https://github.com/JuanjoSalvador/Comicbook-Packager/blob/master/README.md#dependencias)
+    * [Uso](https://github.com/JuanjoSalvador/Comicbook-Packager/blob/master/README.md#uso)
+    * [Desarrollo](https://github.com/JuanjoSalvador/Comicbook-Packager/blob/master/README.md#desarrollo)
+* [Linux](https://github.com/JuanjoSalvador/Comicbook-Packager/blob/master/README.md#gnulinux)
+    * [Instalación](https://github.com/JuanjoSalvador/Comicbook-Packager/blob/master/README.md#instalación-1)
+    * [Uso](https://github.com/JuanjoSalvador/Comicbook-Packager/blob/master/README.md#uso-1)
+    * [Desarrollo](https://github.com/JuanjoSalvador/Comicbook-Packager/blob/master/README.md#desarrollo-1)
+* [Licencia](https://github.com/JuanjoSalvador/Comicbook-Packager/blob/master/README.md#licencia)
+
 ## GNU/Linux
 
 ### Instalación
